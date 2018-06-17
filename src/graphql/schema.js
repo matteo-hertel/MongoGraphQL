@@ -8,7 +8,8 @@ name: String!,
 topSpeed: Int
 }
 type Query{
-allCars: [Car]
+allCars: [Car],
+getCar(_id: ID!): Car
 }
 input CarInput{
 name: String!,
@@ -16,6 +17,8 @@ topSpeed: Int
 }
 type Mutation{
 createCar(input: CarInput): Car
+updateCar(_id: ID!, input: CarInput): Car
+deleteCar(_id: ID!): Boolean
 }
 `;
 module.exports = makeExecutableSchema({

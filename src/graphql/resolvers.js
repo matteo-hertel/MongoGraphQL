@@ -1,25 +1,22 @@
-const cars = [
-  {
-    _id: 8,
-    name: "Ferrari 458",
-    topSpeed: 340
-  },
-  {
-    _id: 16,
-    name: "Aston Martin DB11",
-    topSpeed: 334
-  }
-];
+const Car = require("./../models/car");
 module.exports = {
   Query: {
-    allCars: (root, { msg }, context, info) => {
-      return cars;
+    allCars: async (root, { msg }, context, info) => {
+      return await Car.find();
+    },
+    getCar: async (root, { _id }, context, info) => {
+      return await Car.findById(_id);
     }
   },
   Mutation: {
-    createCar(_, { input }) {
-      cars.push(input);
-      return input;
+    createCar: async (root, { input }) => {
+      return await Car.create(input);
+    },
+    updateCar: async (root, { _id, input }) => {
+      return await Car.findOneAndUpdate({ _id }, input, { new: true });
+    },
+    deleteCar: async (root, { _id }) => {
+      return await Car.findOneAndDelete({ _id });
     }
   }
 };
