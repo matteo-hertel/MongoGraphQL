@@ -1,7 +1,7 @@
 module.exports = {
   Query: {
-    hello: (root, args, context, info) => {
-      return "Hello there 💪";
+    hello: (root, { msg }, context, info) => {
+      return msg;
     }
   }
 };
