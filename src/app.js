@@ -6,9 +6,7 @@ const mongoose = require("mongoose");
 const PORT = 3456;
 const app = express();
 mongoose.Promise = global.Promise;
-mongoose.connect(
-  "mongodb+srv://gql:5iCcUoJ6DJdJjXg5@graphql-dopkb.mongodb.net/gql_cars?retryWrites=true"
-);
+mongoose.connect(process.env.MONGO_URI || "mongodb://localhost/gql_cars");
 app.use(
   "/graphql",
   graphqlHTTP({
